@@ -26,8 +26,8 @@
   programs.bash.enable = true;
   programs.git = {
     enable = true;
-    userName = "Your Name";
-    userEmail = "your-email@example.com";
+    userName = "dvach167";
+    userEmail = "dvach167@mtroyal.ca";
   };
 
   programs.vscode.enable = true;
