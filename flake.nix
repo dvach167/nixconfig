@@ -9,12 +9,12 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; 
-     ghostty = {
-       url = "github:ghostty-org/ghostty";
-     };
-   
-     nvf.url = "github:notashelf/nvf";
+    };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+    };
+
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = {

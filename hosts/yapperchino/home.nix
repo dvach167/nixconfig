@@ -5,23 +5,18 @@
   inputs,
   ...
 }: {
- 
   imports = [
-    
     inputs.nvf.homeManagerModules.default
     ./nvf
-
   ];
 
   home.username = "dom";
   home.homeDirectory = "/home/dom";
 
-  home.packages = [
-    pkgs.vim
-    pkgs.alejandra
-    
-
-
+  home.packages = with pkgs; [
+    vim
+    alejandra
+    libreoffice-qt
     # Add other packages you want to install
   ];
 
@@ -41,7 +36,6 @@
   };
 
   programs.vscode.enable = true;
-  # Enable other programs and configurations as needed
 
   #Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
