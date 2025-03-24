@@ -1,8 +1,18 @@
 {
   config,
   pkgs,
+  lib,
+  inputs,
   ...
 }: {
+ 
+  imports = [
+    
+    inputs.nvf.homeManagerModules.default
+    ./nvf
+
+  ];
+
   home.username = "dom";
   home.homeDirectory = "/home/dom";
 
