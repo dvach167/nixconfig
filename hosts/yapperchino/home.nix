@@ -8,7 +8,7 @@
 
   home.packages = [
     pkgs.vim
-    alejandra
+    pkgs.alejandra
     
 
 
