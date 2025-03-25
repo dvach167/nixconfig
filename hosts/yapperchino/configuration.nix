@@ -64,6 +64,8 @@
 
   programs.firefox.enable = true;
 
+  environment.variables.XCURSOR_SIZE = "32";
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
