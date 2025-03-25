@@ -16,7 +16,10 @@
   home.packages = with pkgs; [
     vim
     alejandra
+    nix-output-monitor
+
     libreoffice-qt
+
     # Add other packages you want to install
   ];
 
