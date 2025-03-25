@@ -64,7 +64,10 @@
 
   programs.firefox.enable = true;
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   # Create the laptop user with sudo (wheel) privileges
   users.users.dom = {
