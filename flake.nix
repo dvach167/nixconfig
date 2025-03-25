@@ -15,6 +15,8 @@
     };
 
     nvf.url = "github:notashelf/nvf";
+
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = {

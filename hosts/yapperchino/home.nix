@@ -20,6 +20,10 @@
     # Add other packages you want to install
   ];
 
+  programs.kitty.enable = true;
+  wayland.windowManager.hyprland.enable = true;
+  home.sessionVariables.NIXOS_OZONE_WL = "1";
+
   programs.btop = {
     enable = true;
     settings = {
@@ -37,8 +41,9 @@
 
   programs.vscode.enable = true;
 
-  #Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  services.dunst.enable = true;
 
   home.stateVersion = "23.11";
 }
