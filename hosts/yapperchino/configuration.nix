@@ -61,6 +61,7 @@
     enable = true;
     remotePlay.openFirewall = true;
   };
+
   programs.firefox.enable = true;
 
   programs.hyprland.enable = true;
