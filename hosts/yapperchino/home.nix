@@ -32,7 +32,35 @@
     };
   };
 
-  programs.bash.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
+    shellAliases = {
+      ll = "ls -lah";
+      gs = "git status";
+    };
+    plugins = [
+      {
+        name = "zsh-autosuggestions";
+        src = pkgs.zsh-autosuggestions;
+      }
+      {
+        name = "zsh-syntax-highlighting";
+        src = pkgs.zsh-syntax-highlighting;
+      }
+      {
+        name = "zsh-history-substring-search";
+        src = pkgs.zsh-history-substring-search;
+      }
+    ];
+    initExtra = ''
+      eval "$(starship init zsh)"
+    '';
+  };
+
   programs.git = {
     enable = true;
     userName = "dvach167";
@@ -40,7 +68,10 @@
   };
 
   # Starship! Bash Shell
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   # I think we know
   programs.vscode.enable = true;

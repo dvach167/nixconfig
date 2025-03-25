@@ -16,8 +16,6 @@
   # Enable experimental features (flakes and nix-command)
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  programs.zsh.enable = true;
-
   # Enable Framework Kernel Updates
   services.fwupd.enable = true;
 
@@ -56,6 +54,8 @@
       device = "nodev";
     };
   };
+
+  programs.zsh.enable = true;
 
   programs.steam = {
     enable = true;
