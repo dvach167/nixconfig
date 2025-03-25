@@ -39,11 +39,17 @@
     userEmail = "dvach167@mtroyal.ca";
   };
 
+  # Starship! Bash Shell
+  programs.starship.enable = true;
+
+  # I think we know
   programs.vscode.enable = true;
 
-  programs.home-manager.enable = true;
+  # Notification Manager
+  programs.mako.enable = true;
 
-  services.dunst.enable = true;
+  # Make sure that Home Manager is ENABLED!
+  programs.home-manager.enable = true;
 
   home.stateVersion = "23.11";
 }

@@ -22,7 +22,10 @@
   services.fwupd.enable = true;
 
   # Enable fingerprint reader support
-  services.fprintd.enable = true;
+  services.fprintd = {
+    enable = true;
+    tod.driver = pkgs.libfprint-2-tod1-vfs0090;
+  };
 
   # System packages for this host
   environment.systemPackages = with pkgs; [
