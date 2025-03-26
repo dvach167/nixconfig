@@ -40,6 +40,10 @@
     ghostty
     kdePackages.breeze-gtk
     swww
+    playerctl
+    pamixer
+    cava
+    rofi
   ];
 
   services.xserver = {
