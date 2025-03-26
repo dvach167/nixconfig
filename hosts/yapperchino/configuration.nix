@@ -8,6 +8,7 @@
     ../../modules/common.nix
     ../../modules/services.nix
     ../../modules/users.nix
+    ../../modules/fonts.nix
     ./hardware-configuration.nix
   ];
 
@@ -38,12 +39,12 @@
     kde-rounded-corners
     ghostty
     kdePackages.breeze-gtk
+    swww
   ];
 
   services.xserver = {
     enable = true;
   };
-  services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   boot.loader = {
@@ -68,9 +69,47 @@
   programs.firefox.enable = true;
 
   # Enabling hyprland
-  programs.hyprland = {
+  #programs.hyprland = {
+  # enable = true;
+  # xwayland.enable = true;
+  #};
+
+  # Enable Niri
+  programs.niri = {
     enable = true;
-    xwayland.enable = true;
+    package = pkgs.niri;
+  };
+
+  # Enable Greeter
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --remember-session --asterisks --theme border=green;text=white;prompt=green;time=green;action=purple;button=green;container=black;input=white";
+        user = "greeter";
+      };
+    };
+  };
+
+  # Enable Power Profile for Laptop
+  services.power-profiles-daemon.enable = false;
+
+  services.tlp = {
+    enable = true;
+    settings = {
+      TLP_DEFAULT_MODE = "BAT";
+
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "power";
+
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 90;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 75;
+    };
   };
 
   # Create the laptop user with sudo (wheel) privileges

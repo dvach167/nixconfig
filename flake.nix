@@ -16,7 +16,7 @@
 
     nvf.url = "github:notashelf/nvf";
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    niri.url = "github:sodiboo/niri-flake";
   };
 
   outputs = {

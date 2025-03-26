@@ -2,13 +2,19 @@
   config,
   pkgs,
   lib,
+  hostname,
   inputs,
   ...
-}: {
+}: let
+  yappachino = hostname == "yappachino";
+in {
   imports = [
     inputs.nvf.homeManagerModules.default
+    inputs.niri.homeModules.niri
     ./nvf
+    ../../home/wayland
   ];
+  # ++ lib.optional yappachino ../../home/wayland;
 
   home = {
     username = "dom";
