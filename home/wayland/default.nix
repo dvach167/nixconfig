@@ -5,5 +5,7 @@
     ./hyprlock
     ./niri
     ./waybar
+    ./nvf
+    ./rofi
   ];
 }
