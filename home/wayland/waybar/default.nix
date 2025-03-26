@@ -1,150 +1,349 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+let
+  swaync = "swaync-client -t -sw";
+in {
   programs.waybar = {
     enable = true;
-    package = pkgs.waybar;
-
     settings = [
       {
         layer = "top";
-        height = 10;
-        modules-left = ["custom/arch" "hyprland/workspaces" "memory"];
-        modules-center = ["custom/playerctl"];
-        modules-right = ["backlight" "pulseaudio" "battery" "network" "clock" "tray" "cpu" "temperature"];
-        "custom/arch" = {
-          format = "  ";
-          on-click = "sh /home/dom/.config/hypr/scripts/exec_wofi application_launcher";
-        };
-        "custom/playerctl" = {
-          format = "{icon}  <span>{}</span>";
-          return-type = "json";
-          max-length = 55;
-          exec = "playerctl -a metadata --format '{\"text\": \"  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-          on-click-middle = "playerctl previous";
-          on-click = "playerctl play-pause";
-          on-click-right = "playerctl next";
-          format-icons = {
-            Paused = "<span foreground='#bb9af7'></span>";
-            Playing = "<span foreground='#bb9af7'></span>";
-          };
-        };
-        "hyprland/workspaces" = {
+        position = "top";
+        modules-left = ["custom/menu" "custom/notification" "clock"];
+        modules-center = ["niri/workspaces"];
+        modules-right = ["group/expand" "bluetooth" "custom/endpoint" "network" "battery" "tray"];
+        reload_style_on_change = true;
+
+        "niri/workspaces" = {
           format = "{icon}";
-          on-click = "activate";
-          all-outputs = true;
-          persistent_workspaces = {
-            "1" = [];
-            "2" = [];
-            "3" = [];
-            "4" = [];
-            "5" = [];
-            "6" = [];
-            "7" = [];
-            "8" = [];
-            "9" = [];
-            "10" = [];
-          };
           format-icons = {
-            "1" = "1";
-            "2" = "2";
-            "3" = "3";
-            "4" = "4";
-            "5" = "5";
-            "6" = "6";
-            "7" = "7";
-            "8" = "8";
-            "9" = "9";
-            "10" = "1〇";
+            active = "";
+            default = "";
+            empty = "";
+          };
+          persistent-workspaces."*" = [1 2 3 4 5];
+        };
+
+        "custom/notification" = {
+          tooltip = false;
+          format = "";
+          on-click = "dunstctl history-pop";
+          escape = true;
+        };
+
+        clock = {
+          format = "{:%I:%M:%S %p} ";
+          interval = 1;
+          tooltip-format = "<tt>{calendar}</tt>";
+          calendar.format.today = "<span color='#fAfBfC'><b>{}</b></span>";
+          actions = {
+            on-click-right = "shift_down";
+            on-click = "shift_up";
           };
         };
-        clock = {
-          format = "<span color='#b69bf1'> </span>{:%H:%M}";
-          format-alt = "<span foreground='#b69bf1'> </span><span>{:%I:%M %p %a %d}</span>";
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        };
-        battery = {
-          format = "<span color='#a8cd76'>{icon}</span> {capacity}%";
-          format-icons = ["" "" "" "" "" "" "" "" "" "" ""];
-          format-charging = "<span color='#a8cd76'></span> {capacity}%";
-        };
+
         network = {
-          interface = "wlo1";
-          format = "{ifname}";
-          format-wifi = "<span color='#90cdfa'> </span>{essid}({signalStrength}%)";
-          format-ethernet = "{ipaddr}/{cidr} ";
-          format-disconnected = "<span color='#ff005f'>󰖪 </span>No Network";
+          format-wifi = " ";
+          format-ethernet = " ";
+          format-disconnected = " ";
+          tooltip-format-disconnected = "Error";
+          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
+          tooltip-format-ethernet = "{ifname} 🖧";
           on-click = "kitty nmtui";
         };
-        tray = {
-          icon-size = 20;
-          reverse-direction = true;
-          spacing = 6;
+
+        bluetooth = {
+          format-on = "󰂯 ";
+          format-off = "BT-off";
+          format-disabled = "󰂲 ";
+          format-connected-battery = "{device_battery_percentage}% 󰂯";
+          format-alt = "{device_alias} 󰂯 ";
+          tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\n{device_address}";
+          tooltip-format-enumerate-connected-battery = "{device_alias}\n{device_address}\n{device_battery_percentage}%";
+          on-click-right = "kitty blueman-manager";
         };
-        cpu = {
-          format = "<span foreground='#ff005f'></span>  {usage}%";
+
+        battery = {
+          interval = 30;
+          states = {
+            good = 95;
+            warning = 30;
+            critical = 20;
+          };
+          format = "{capacity}% {icon}";
+          format-charging = "{capacity}% 󰂄";
+          format-plugged = "{capacity}% 󰂄 ";
+          format-alt = "{time} {icon}";
+          format-icons = [
+            "󰁻"
+            "󰁼"
+            "󰁾"
+            "󰂀"
+            "󰂂"
+            "󰁹"
+          ];
         };
+
+        "custom/pacman" = {
+          format = "󰅢 {}";
+          interval = 30;
+          exec = "checkupdates | wc -l";
+          exec-if = "exit 0";
+          on-click = "kitty sudo; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar";
+          signal = 8;
+          tooltip = false;
+        };
+
+        "custom/expand" = {
+          format = "";
+          tooltip = false;
+        };
+
+        "custom/endpoint" = {
+          format = "|";
+          tooltip = false;
+        };
+
+        "group/expand" = {
+          orientation = "horizontal";
+          drawer = {
+            transition-duration = 600;
+            transition-to-left = true;
+            click-to-reveal = true;
+          };
+          modules = ["custom/expand" "custom/colorpicker" "cpu" "memory" "temperature" "custom/endpoint"];
+        };
+
+        "custom/colorpicker" = {
+          format = "{}";
+          return-type = "json";
+          interval = "once";
+          exec = "~/.config/waybar/scripts/colorpicker.sh -j";
+          on-click = "~/.config/waybar/scripts/colorpicker.sh";
+          signal = 1;
+        };
+
+        cpu.format = "󰻠 ";
+        memory.format = " ";
         temperature = {
           critical-threshold = 80;
-          format = "<span foreground='#5d73ca'></span> {temperatureC}°C";
+          format = " ";
         };
+
+        tray = {
+          icon-size = 14;
+          spacing = 10;
+        };
+
+        style = ''
+          @import url('../../.cache/wal/colors-waybar.css');
+
+          * {
+              font-size: 15px;
+              font-family: "CodeNewRoman Nerd Font Propo";
+          }
+          window#waybar {
+              all: unset;
+          }
+          .modules-left, .modules-center, .modules-right {
+              padding: 7px;
+              margin: 10px 0 5px 10px;
+              border-radius: 10px;
+              background: alpha(@background, .6);
+              box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+          }
+          .modules-center { margin-left: 0; margin-right: 0; }
+          .modules-right { margin-left: 0; margin-right: 10px; }
+
+          tooltip {
+              background: @background;
+              color: @color7;
+          }
+
+          #clock:hover, #custom-pacman:hover, #custom-notification:hover,
+          #bluetooth:hover, #network:hover, #battery:hover, #cpu:hover,
+          #memory:hover, #temperature:hover {
+              transition: all .3s ease;
+              color: @color9;
+          }
+          #custom-notification, #clock, #custom-pacman, #bluetooth, #network,
+          #battery, #cpu, #memory, #temperature, #group-expand, #tray {
+              padding: 0px 5px;
+              transition: all .3s ease;
+              color: @color7;
+          }
+          #battery.charging { color: #26A65B; }
+          #battery.warning:not(.charging) { color: #ffbe61; }
+          #battery.critical:not(.charging) {
+              color: #f53c3c;
+              animation-name: blink;
+              animation-duration: 0.5s;
+              animation-timing-function: linear;
+              animation-iteration-count: infinite;
+              animation-direction: alternate;
+          }
+
+          #custom-expand {
+              padding: 0px 5px;
+              color: alpha(@foreground, .2);
+              text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+              transition: all .3s ease;
+          }
+          #custom-expand:hover {
+              color: rgba(255,255,255,.2);
+              text-shadow: 0px 0px 2px rgba(255, 255, 255, .5);
+          }
+
+          #workspaces {
+              padding: 0px 5px;
+          }
+          #workspaces button {
+              all: unset;
+              padding: 0px 5px;
+              color: alpha(@color9, .4);
+              transition: all .2s ease;
+          }
+          #workspaces button:hover {
+              color: rgba(0,0,0,0);
+              text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+              transition: all 1s ease;
+          }
+          #workspaces button.active {
+              color: @color9;
+              text-shadow: 0px 0px 2px rgba(0, 0, 0, .5);
+          }
+          #workspaces button.empty {
+              color: rgba(0,0,0,0);
+            text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
+          }
+          #workspaces button.empty:hover, #workspaces button.empty.active {
+              text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+              transition: all 1s ease;
+          }
+
+          #custom-endpoint {
+              color: transparent;
+              text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
+          }
+          #tray menu *, #tray menu separator {
+              padding: 0px 5px;
+              transition: all .3s ease;
+          }
+        '';
       }
     ];
+  };
 
-    style = ''
-      * {
-        border: none;
-        font-family: 'JetBrainsMono Nerd Font', 'Symbols Only';
-        font-size: 16px;
-        font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
-        min-height: 30px;
+  home.file.".config/waybar/scripts/colourpicker.sh" = {
+    text = ''
+          #!/usr/bin/env bash
+      check() {
+        command -v "$1" 1>/dev/null
       }
-      window#waybar {
-        background: transparent;
+
+
+
+      loc="$HOME/.cache/colorpicker"
+      [ -d "$loc" ] || mkdir -p "$loc"
+      [ -f "$loc/colors" ] || touch "$loc/colors"
+
+      limit=10
+
+      [[ $# -eq 1 && $1 = "-l" ]] && {
+        cat "$loc/colors"
+        exit
       }
-      #custom-arch, #workspaces {
-        border-radius: 10px;
-        background-color: #191a24;
-        color: #c0caf5;
-        margin-top: 15px;
-        margin-right: 15px;
-        padding-top: 1px;
-        padding-left: 10px;
-        padding-right: 10px;
+
+      [[ $# -eq 1 && $1 = "-j" ]] && {
+        text="$(head -n 1 "$loc/colors")"
+
+        mapfile -t allcolors < <(tail -n +2 "$loc/colors")
+        # allcolors=($(tail -n +2 "$loc/colors"))
+        tooltip="<b>   COLORS</b>\n\n"
+
+        tooltip+="-> <b>$text</b>  <span color='$text'></span>  \n"
+        for i in ''${allcolors[@]}"; do
+          tooltip+="   <b>$i</b>  <span color='$i'></span>  \n"
+        done
+
+        cat <<EOF
+      { "text":"<span color='$text'></span>", "tooltip":"$tooltip"}
+      EOF
+
+        exit
       }
-      #custom-arch {
-        font-size: 20px;
-        margin-left: 15px;
+
+      check hyprpicker || {
+        notify "hyprpicker is not installed"
+        exit
       }
-      #workspaces button {
-        background: #191a24;
-        color: #c0caf5;
+      killall -q hyprpicker
+      color=$(hyprpicker)
+
+      check wl-copy && {
+        echo "$color" | sed -z 's/\n//g' | wl-copy
       }
-      #workspaces button.active {
-        color: #2ac3de;
+
+      prevColors=$(head -n $((limit - 1)) "$loc/colors")
+      echo "$color" >"$loc/colors"
+      echo "$prevColors" >>"$loc/colors"
+      sed -i '/^$/d' "$loc/colors"
+      source ~/.cache/wal/colors.sh && notify-send "Color Picker" "This color has been selected: $color" -i $wallpaper
+      pkill -RTMIN+1 waybar
+    '';
+    executable = true;
+  };
+
+  home.file.".config/waybar/scripts/select.sh" = {
+    text = ''
+          #!/bin/bash
+      WAYBAR_DIR="$HOME/.config/waybar"
+      STYLECSS="$WAYBAR_DIR/style.css"
+      CONFIG="$WAYBAR_DIR/config"
+      ASSETS="$WAYBAR_DIR/assets"
+      THEMES="$WAYBAR_DIR/themes"
+      menu() {
+          find ''${ASSETS}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | awk '{print "img:"$0}'
       }
-      #clock, #backlight, #custom-cava, #temperature, #cpu, #pulseaudio, #network, #battery, #tray, #memory, #custom-playerctl {
-        border-radius: 10px;
-        background-color: #191a24;
-        color: #c0caf5;
-        margin-top: 15px;
-        padding-left: 9px;
-        padding-right: 9px;
-        margin-right: 15px;
+      main() {
+          choice=$(menu | wofi -c ~/.config/wofi/waybar -s ~/.config/wofi/style-waybar.css --show dmenu --prompt "  Select Waybar (Scroll with Arrows)" -n)
+          selected_wallpaper=$(echo "$choice" | sed 's/^img://')
+          echo $selected_wallpaper
+          if [[ "$selected_wallpaper" == "$ASSETS/experimental.png" ]]; then
+              cat $THEMES/experimental/style-experimental.css > $STYLECSS
+              cat $THEMES/experimental/config-experimental > $CONFIG
+              pkill waybar && waybar
+          elif [[ "$selected_wallpaper" == "$ASSETS/main.png" ]]; then
+              cat $THEMES/default/style-default.css > $STYLECSS
+              cat $THEMES/default/config-default > $CONFIG
+              pkill waybar && waybar
+          elif [[ "$selected_wallpaper" == "$ASSETS/line.png" ]]; then
+              cat $THEMES/line/style-line.css > $STYLECSS
+              cat $THEMES/line/config-line > $CONFIG
+              pkill waybar && waybar
+          elif [[ "$selected_wallpaper" == "$ASSETS/zen.png" ]]; then
+              cat $THEMES/zen/style-zen.css > $STYLECSS
+              cat $THEMES/zen/config-zen > $CONFIG
+              pkill waybar && waybar
+          fi
+
       }
-      @keyframes blink {
-        to {
-          background-color: #ffffff;
-          color: black;
-        }
-      }
-      #battery.warning:not(.charging) {
-        background: #f38ba8;
-        color: white;
-        animation-name: blink;
-        animation
-      }'';
+      main '';
+    executable = true;
+  };
+
+  home.file.".config/waybar/scripts/refresh.sh" = {
+    text = ''
+          #!/bin/bash
+
+      # Check if waybar is running
+      if pgrep -x "waybar" > /dev/null; then
+          # If running, kill the waybar process
+          pkill -x "waybar"
+      else
+          # If not running, start waybar
+          waybar &
+      fi'';
+    executable = true;
   };
 }

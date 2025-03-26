@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   # Enable unfree packages globally
@@ -10,15 +11,6 @@
   services.pulseaudio.enable = false;
   services.pipewire.enable = true;
   services.pipewire.alsa.enable = true;
-
-  # Enable Bluetooth service
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
-    settings = {
-      Policy.AutoEnable = true;
-    };
-  };
 
   # Network
   networking = {

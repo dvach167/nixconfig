@@ -32,6 +32,7 @@ in {
       wlr-randr
       cava
       tty-clock
+      swaynotificationcenter
 
       libreoffice-qt
       # Add other packages you want to install
@@ -53,6 +54,8 @@ in {
       theme_background = false;
     };
   };
+
+  programs.pywal.enable = true;
 
   # Enabling Zsh with some plugins
   programs.zsh = {

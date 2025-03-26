@@ -3,11 +3,11 @@
   pkgs,
   ...
 }: {
-  programs.rofi = {
-    enable = true;
-    terminal = "${pkgs.cool-retro-term}/bin/cool-retro-term";
-    theme = ./theme.rasi;
-  };
+  # programs.rofi = {
+  # enable = true;
+  # terminal = "${pkgs.cool-retro-term}/bin/cool-retro-term";
+  #  theme = ./theme.rasi;
+  #};
 
   home.file.".config/rofi/theme.rasi".text = ''
 

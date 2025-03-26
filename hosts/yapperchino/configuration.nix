@@ -44,6 +44,7 @@
     pamixer
     cava
     rofi
+    bluez
   ];
 
   services.xserver = {
@@ -62,6 +63,15 @@
     };
   };
 
+  services.blueman.enable = true;
+  # Enable Bluetooth service
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      Policy.AutoEnable = true;
+    };
+  };
   # All my programs that need configuring
   programs.zsh.enable = true;
 
