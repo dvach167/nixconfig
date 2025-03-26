@@ -212,6 +212,22 @@ in {
           clip-to-geometry = true;
           draw-border-with-background = false;
         })
+        {
+          matches = [
+            {
+              title = "Bluetooth Devices"; # Match Blueman Manager
+              is-floating = true;
+            }
+          ];
+          open-floating = true;
+          default-floating-position = {
+            x = 100;
+            y = 200;
+            relative-to = "top-right";
+          };
+          max-width = 480; # 1/4th of screen width
+          max-height = 359; # 1/3rd of screen height`
+        }
       ];
     };
   };
