@@ -7,7 +7,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable Pipewire for audio (and disable PulseAudio)
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.pipewire.enable = true;
   services.pipewire.alsa.enable = true;
 

@@ -21,10 +21,6 @@
     nix-output-monitor
 
     libreoffice-qt
-    home-manager
-
-    libinput-gestures
-    xdotool
     # Add other packages you want to install
   ];
 
@@ -41,7 +37,7 @@
   # Enabling Zsh with some plugins
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     historySubstringSearch.enable = true;
@@ -85,7 +81,7 @@
   programs.vscode.enable = true;
 
   # Notification Manager
-  programs.mako.enable = true;
+  services.mako.enable = true;
 
   # Make sure that Home Manager is ENABLED!
   programs.home-manager.enable = true;
