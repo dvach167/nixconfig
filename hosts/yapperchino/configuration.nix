@@ -37,11 +37,13 @@
     nextcloud-client
     kde-rounded-corners
     ghostty
+    kdePackages.breeze-gtk
   ];
 
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+  };
   services.displayManager.sddm.enable = true;
-
   services.desktopManager.plasma6.enable = true;
 
   boot.loader = {
@@ -55,6 +57,7 @@
     };
   };
 
+  # All my programs that need configuring
   programs.zsh.enable = true;
 
   programs.steam = {
@@ -64,8 +67,7 @@
 
   programs.firefox.enable = true;
 
-  environment.variables.XCURSOR_SIZE = "32";
-
+  # Enabling hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -75,7 +77,7 @@
   users.users.dom = {
     isNormalUser = true;
     home = "/home/dom";
-    extraGroups = ["wheel" "networkmanager" "docker"];
+    extraGroups = ["wheel" "networkmanager" "docker" "input"];
     shell = pkgs.zsh;
   };
 }
