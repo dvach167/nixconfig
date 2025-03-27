@@ -24,7 +24,7 @@ in {
 
         "custom/notification" = {
           tooltip = false;
-          format = "";
+          format = " ";
           on-click = "dunstctl history-pop";
           escape = true;
         };
