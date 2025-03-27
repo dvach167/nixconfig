@@ -9,7 +9,7 @@ in {
         position = "top";
         modules-left = ["custom/menu" "custom/notification" "clock"];
         modules-center = ["niri/workspaces"];
-        modules-right = ["group/expand" "bluetooth" "custom/endpoint" "network" "battery" "tray"];
+        modules-right = ["group/expand" "bluetooth" "pulseaudio" "custom/endpoint" "network" "battery" "tray"];
         reload_style_on_change = true;
 
         "niri/workspaces" = {
@@ -20,6 +20,25 @@ in {
             empty = "";
           };
           persistent-workspaces."*" = [1 2 3 4 5];
+        };
+
+        "pulseaudio" = {
+          format = "{icon} {volume}%";
+          tooltip = false;
+          format-muted = "  Muted";
+          on-click = "pamixer -t";
+          on-scroll-down = "pamixer -i 5";
+          on-scroll-up = "pamixer -d 5";
+          scroll-step = 75;
+          format-icons = {
+            headphone = " ";
+            hands-free = " ";
+            headset = " ";
+            phone = " ";
+            portable = " ";
+            car = " ";
+            default = [" " " " " "];
+          };
         };
 
         "custom/notification" = {
@@ -51,11 +70,11 @@ in {
         };
 
         bluetooth = {
-          format-on = "󰂯 ";
+          format-on = " ";
           format-off = "BT-off";
           format-disabled = "󰂲 ";
           format-connected-battery = "{device_battery_percentage}% 󰂯";
-          format-alt = "{device_alias} 󰂯 ";
+          format-alt = "{device_alias}  ";
           tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
           tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}\n{device_address}";

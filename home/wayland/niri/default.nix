@@ -103,11 +103,32 @@ in {
 
         "Ctrl+Alt+Delete".action.spawn = ["~/nix-config/scripts/fuzzel_power.sh"];
 
-        "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" "--limit" "1.0"];
+        "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.025+" "--limit" "1.0" "pkill" "-RTMIN+8" "waybar"];
+        #"XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" "--limit" "1.0"];
         "XF86AudioRaiseVolume".allow-when-locked = true;
-        "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
+        "XF86AudioLowerVolume".action.spawn = [
+          "wpctl"
+          "set-volume"
+          "@DEFAULT_AUDIO_SINK@"
+          "0.025-"
+          "--limit"
+          "1.0"
+          "pkill"
+          "-RTMIN+8"
+          "waybar"
+        ];
+        #"XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"];
         "XF86AudioLowerVolume".allow-when-locked = true;
-        "XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
+        "XF86AudioMute".action.spawn = [
+          "wpctl"
+          "set-mute"
+          "@DEFAULT_AUDIO_SINK@"
+          "toggle"
+          "pkill"
+          "-RTMIN+8"
+          "waybar"
+        ];
+        #"XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
         "XF86AudioMute".allow-when-locked = true;
         "XF86AudioMicMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"];
         "XF86AudioMicMute".allow-when-locked = true;

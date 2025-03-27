@@ -33,7 +33,7 @@ in {
       cava
       tty-clock
       swaynotificationcenter
-
+      pamixer
       libreoffice-qt
       # Add other packages you want to install
     ]

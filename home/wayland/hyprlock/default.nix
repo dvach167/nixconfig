@@ -1,81 +1,101 @@
 {
+  config,
+  pkgs,
+  ...
+}: let
+  hyprDir = "~/.config/hypr";
+  infoScript = "${hyprDir}/bin/infonlock.sh";
+in {
   programs.hyprlock = {
     enable = true;
 
     settings = {
       general = {
-        disable_loading_bar = true;
-        immediate_render = true;
-        hide_cursor = false;
         no_fade_in = true;
+        grace = 1;
+        disable_loading_bar = false;
+        hide_cursor = true;
+        ignore_empty_input = true;
+        text_trim = true;
       };
 
       auth = {
         "fingerprint:enabled" = true;
       };
 
-      background = [
+      background = {
+        monitor = "";
+        path = "/home/dom/Downloads/wallhaven-g77rjq.jpg";
+        blur_passes = 2;
+        contrast = 0.8916;
+        brightness = 0.7172;
+        vibrancy = 0.1696;
+        vibrancy_darkness = 0;
+      };
+
+      labels = [
         {
           monitor = "";
-          path = "~/Pictures/outer-wilds-4k.png";
-          blur_passes = 2;
-          blur_size = 7;
-          noise = 1.17e-2; # what the fuck???
-        }
-      ];
-
-      input-field = [
-        {
-          monitor = "eDP-1";
-
-          size = "300, 50";
-          valign = "bottom";
-          position = "0%, 10%";
-
-          outline_thickness = 1;
-
-          font_color = "rgb(248, 248, 242)";
-
-          outer_color = "rgba(139, 233, 253, 0.5)";
-          inner_color = "rgba(80, 250, 123, 0.1)";
-          check_color = "rgba(241, 250, 140, 0.5)";
-          fail_color = "rgba(255, 85, 85, 0.5)";
-
-          fade_on_empty = false;
-          placeholder_text = "Enter Password";
-
-          dots_spacing = 0.2;
-          dots_center = true;
-          dots_fade_time = 100;
-
-          shadow_color = "rgba(0, 0, 0, 0.1)";
-          shadow_size = 7;
-          shadow_passes = 2;
-        }
-      ];
-
-      label = [
-        {
-          monitor = "";
-          text = ''
-            cmd[update:1000] echo "<span>$(date +'%H:%M:%S')</span>"
-          '';
-          font_size = 60;
-          font_family = "FiraCode Nerd Font";
-
-          color = "rgb(248, 248, 242)";
-
-          position = "0%, -30%";
-
-          valign = "center";
+          text = "cmd[update:1000] echo -e \"$(date +\"%H\")\"";
+          color = "rgba(255, 255, 255, 1)";
+          font_size = 150;
+          font_family = "AlfaSlabOne";
+          position = "0, -250";
           halign = "center";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:1000] echo -e \"$(date +\"%M\")\"";
+          color = "rgba(255, 255, 255, 1)";
+          font_size = 150;
+          font_family = "AlfaSlabOne";
+          position = "0, -420";
+          halign = "center";
+          valign = "top";
+        }
+        {
+          monitor = "";
+          text = "cmd[update:1000] echo -e \"$(date +\"%d %b %A\")\"";
+          color = "rgba(255, 255, 255, 1)";
+          font_size = 14;
+          font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
+          position = "0, -130";
+          halign = "center";
+          valign = "center";
+        }
 
-          shadow_color = "rgba(0, 0, 0, 0.1)";
-          shadow_size = 20;
-          shadow_passes = 2;
-          shadow_boost = 0.3;
+        {
+          monitor = "";
+          text = "cmd[update:1000] echo -e \"$(bash ${infoScript})\"";
+          color = "rgba(255, 255, 255, 1)";
+          font_size = 12;
+          font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
+          position = "-20, -510";
+          halign = "right";
+          valign = "center";
         }
       ];
+
+      input-field = {
+        monitor = "";
+        size = "250, 60";
+        outline_thickness = 0;
+        outer_color = "rgba(0, 0, 0, 1)";
+        dots_size = 0.1;
+        dots_spacing = 1;
+        dots_center = true;
+        inner_color = "rgba(0, 0, 0, 1)";
+        font_color = "rgba(200, 200, 200, 1)";
+        fade_on_empty = false;
+        font_family = "JetBrains Mono Nerd Font Mono";
+        placeholder_text = "<span foreground=\"##cdd6f4\"> $USER</span>";
+        hide_input = false;
+        position = "0, -470";
+        halign = "center";
+        valign = "center";
+        zindex = 10;
+      };
     };
   };
 }
