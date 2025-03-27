@@ -45,6 +45,8 @@
     cava
     rofi
     bluez
+    python312Full
+    python3Packages.dbus-python
   ];
 
   services.xserver = {

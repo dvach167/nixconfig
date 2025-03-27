@@ -25,10 +25,10 @@ in {
         "pulseaudio" = {
           format = "{icon} {volume}%";
           tooltip = false;
-          format-muted = "  Muted";
+          format-muted = " 󰖁 ";
           on-click = "pamixer -t";
-          on-scroll-down = "pamixer -i 5";
-          on-scroll-up = "pamixer -d 5";
+          on-scroll-down = "pamixer -i 1";
+          on-scroll-up = "pamixer -d 1";
           scroll-step = 75;
           format-icons = {
             headphone = " ";
@@ -79,7 +79,7 @@ in {
           tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}\n{device_address}";
           tooltip-format-enumerate-connected-battery = "{device_alias}\n{device_address}\n{device_battery_percentage}%";
-          on-click-right = "blueman-manager";
+          on-click = "blueman-manager";
         };
 
         battery = {
@@ -158,16 +158,16 @@ in {
           @import url('../../.cache/wal/colors-waybar.css');
 
           * {
-              font-size: 15px;
+              font-size: 10px;
               font-family: "CodeNewRoman Nerd Font Propo";
           }
           window#waybar {
               all: unset;
           }
           .modules-left, .modules-center, .modules-right {
-              padding: 7px;
-              margin: 10px 0 5px 10px;
-              border-radius: 10px;
+              padding: 0px;
+              margin: 5px 0 5px 5px;
+              border-radius: 5px;
               background: alpha(@background, .6);
               box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           }

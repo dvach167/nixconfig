@@ -11,7 +11,6 @@ in {
 
     settings = {
       general = {
-        no_fade_in = true;
         grace = 1;
         disable_loading_bar = false;
         hide_cursor = true;
@@ -25,77 +24,93 @@ in {
 
       background = {
         monitor = "";
-        path = "/home/dom/Downloads/wallhaven-g77rjq.jpg";
+        path = "screenshot";
         blur_passes = 2;
+        blur_size = 7;
         contrast = 0.8916;
         brightness = 0.7172;
         vibrancy = 0.1696;
         vibrancy_darkness = 0;
       };
 
-      labels = [
-        {
-          monitor = "";
-          text = "cmd[update:1000] echo -e \"$(date +\"%H\")\"";
-          color = "rgba(255, 255, 255, 1)";
-          font_size = 150;
-          font_family = "AlfaSlabOne";
-          position = "0, -250";
-          halign = "center";
-          valign = "top";
-        }
-        {
-          monitor = "";
-          text = "cmd[update:1000] echo -e \"$(date +\"%M\")\"";
-          color = "rgba(255, 255, 255, 1)";
-          font_size = 150;
-          font_family = "AlfaSlabOne";
-          position = "0, -420";
-          halign = "center";
-          valign = "top";
-        }
-        {
-          monitor = "";
-          text = "cmd[update:1000] echo -e \"$(date +\"%d %b %A\")\"";
-          color = "rgba(255, 255, 255, 1)";
-          font_size = 14;
-          font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
-          position = "0, -130";
-          halign = "center";
-          valign = "center";
-        }
+      #image = [
+      # {
+      #monitor="";
+      #halign="center";
+      #path="/home/dom/Downloads/";
+      #position="0, 50";
+      #valign="center";
+      #}
+      #];
 
+      input-field = [
         {
           monitor = "";
-          text = "cmd[update:1000] echo -e \"$(bash ${infoScript})\"";
-          color = "rgba(255, 255, 255, 1)";
-          font_size = 12;
-          font_family = "JetBrains Mono Nerd Font Mono ExtraBold";
-          position = "-20, -510";
-          halign = "right";
+          size = "350,75";
+          check_color = "rgb(30, 107, 204)";
+          dots_center = "true";
+          dots_size = "0.200000";
+          dots_spacing = "0.350000";
+          fade_on_empty = "false";
+          font_color = "rgb(111, 45, 104)";
+          halign = "center";
+          hide_input = "false";
+          inner_color = "rgba(0, 0, 0, 0.2)";
+          outer_color = "rgba(0, 0, 0, 0)";
+          outline_thickness = "2";
+          placeholder_text = ''<i><span foreground="##cdd6f4">Input Password...</span></i>'';
+          position = "0, -100";
+          rounding = "-1";
           valign = "center";
         }
       ];
 
-      input-field = {
-        monitor = "";
-        size = "250, 60";
-        outline_thickness = 0;
-        outer_color = "rgba(0, 0, 0, 1)";
-        dots_size = 0.1;
-        dots_spacing = 1;
-        dots_center = true;
-        inner_color = "rgba(0, 0, 0, 1)";
-        font_color = "rgba(200, 200, 200, 1)";
-        fade_on_empty = false;
-        font_family = "JetBrains Mono Nerd Font Mono";
-        placeholder_text = "<span foreground=\"##cdd6f4\"> $USER</span>";
-        hide_input = false;
-        position = "0, -470";
-        halign = "center";
-        valign = "center";
-        zindex = 10;
-      };
+      label = [
+        {
+          monitor = "";
+          color = "rgb(242, 243, 244)";
+          font_family = "SF Pro Text";
+          font_size = "140";
+          halign = "center";
+          position = "0, 300";
+          text = ''$TIME'';
+          valign = "center";
+        }
+        {
+          monitor = "";
+          color = "rgb(242, 243, 244)";
+          font_family = "SF Pro Text";
+          font_size = "25";
+          halign = "center";
+          position = "0, 410";
+          text = ''cmd[update:43200000] echo "$(date +"%A, %d %B")"'';
+          valign = "center";
+        }
+
+        {
+          monitor = "";
+          text = ''cmd[update:1000] echo "$(~/.config/Scripts/battery-status)‎"'';
+          color = "rgba(242, 243, 244, 0.75)";
+          font_size = "30";
+          #"19";
+          font_family = "SF Pro Display Bold";
+          position = "-93, 920";
+          halign = "right";
+          valign = "center";
+        }
+
+        {
+          monitor = "";
+          text = ''cmd[update:1000] echo "$(~/.config/Scripts/network-status)‎"'';
+          color = "rgba(242, 243, 244, 0.75)";
+          font_size = "26";
+          #"16"
+          font_family = "SF Pro Display Bold";
+          position = "-35, 920";
+          halign = "right";
+          valign = "center";
+        }
+      ];
     };
   };
 }

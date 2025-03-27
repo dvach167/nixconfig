@@ -35,7 +35,6 @@ in {
       swaynotificationcenter
       pamixer
       libreoffice-qt
-      # Add other packages you want to install
     ]
     ++ (with pkgs; [
       nautilus
@@ -152,13 +151,6 @@ in {
       package = pkgs.kdePackages.breeze-gtk;
     };
   };
-  # Setting a default config for libinput-gestures
-  home.file.".config/libinput-gestures.conf".text = ''
-    gesture swipe left  xdotool key Super+Left
-    gesture swipe right xdotool key Super+Right
-    gesture swipe up    xdotool key Super+Up
-    gesture swipe down  xdotool key Super+Down
-  '';
 
   home.stateVersion = "23.11";
 }

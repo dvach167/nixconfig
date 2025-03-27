@@ -17,6 +17,11 @@
     nvf.url = "github:notashelf/nvf";
 
     niri.url = "github:sodiboo/niri-flake";
+
+    sf-pro = {
+      url = "https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg";
+      flake = false;
+    };
   };
 
   outputs = {
