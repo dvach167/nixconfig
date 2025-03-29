@@ -36,7 +36,6 @@
 
       theme = {
         enable = true;
-        name = "dracula";
       };
 
       statusline.lualine = {

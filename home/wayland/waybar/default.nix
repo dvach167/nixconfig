@@ -158,15 +158,19 @@ in {
           @import url('../../.cache/wal/colors-waybar.css');
 
           * {
-              font-size: 10px;
+              font-size: 15px;
               font-family: "CodeNewRoman Nerd Font Propo";
           }
           window#waybar {
+              margin-bottom: 2px;
+              margin-top: 2px;
+              padding-bottom:0px;
+              padding-top: 0px;
               all: unset;
           }
           .modules-left, .modules-center, .modules-right {
-              padding: 0px;
-              margin: 5px 0 5px 5px;
+              padding: 10px;
+              margin: 1px 0 1px 5px;
               border-radius: 5px;
               background: alpha(@background, .6);
               box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
@@ -194,7 +198,7 @@ in {
           #battery.charging { color: #26A65B; }
           #battery.warning:not(.charging) { color: #ffbe61; }
           #battery.critical:not(.charging) {
-              color: #f53c3c;
+              color: #f533c;
               animation-name: blink;
               animation-duration: 0.5s;
               animation-timing-function: linear;

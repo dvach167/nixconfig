@@ -24,7 +24,7 @@ in {
 
       background = {
         monitor = "";
-        path = "screenshot";
+        #path = "screenshot";
         blur_passes = 2;
         blur_size = 7;
         contrast = 0.8916;
@@ -43,16 +43,17 @@ in {
       #}
       #];
 
-      input-field = [
+      /*
+        input-field = [
         {
           monitor = "";
           size = "350,75";
-          check_color = "rgb(30, 107, 204)";
-          dots_center = "true";
-          dots_size = "0.200000";
-          dots_spacing = "0.350000";
+          #check_color = "rgb(30, 107, 204)";
+          #dots_center = "true";
+          #dots_size = "0.200000";
+          #dots_spacing = "0.350000";
           fade_on_empty = "false";
-          font_color = "rgb(111, 45, 104)";
+          #font_color = "rgb(111, 45, 104)";
           halign = "center";
           hide_input = "false";
           inner_color = "rgba(0, 0, 0, 0.2)";
@@ -64,11 +65,12 @@ in {
           valign = "center";
         }
       ];
+      */
 
       label = [
         {
           monitor = "";
-          color = "rgb(242, 243, 244)";
+          #color = "rgb(242, 243, 244)";
           font_family = "SF Pro Text";
           font_size = "140";
           halign = "center";
@@ -78,7 +80,7 @@ in {
         }
         {
           monitor = "";
-          color = "rgb(242, 243, 244)";
+          #color = "rgb(242, 243, 244)";
           font_family = "SF Pro Text";
           font_size = "25";
           halign = "center";
@@ -90,7 +92,7 @@ in {
         {
           monitor = "";
           text = ''cmd[update:1000] echo "$(~/.config/Scripts/battery-status)‎"'';
-          color = "rgba(242, 243, 244, 0.75)";
+          #color = "rgba(242, 243, 244, 0.75)";
           font_size = "30";
           #"19";
           font_family = "SF Pro Display Bold";
@@ -102,7 +104,7 @@ in {
         {
           monitor = "";
           text = ''cmd[update:1000] echo "$(~/.config/Scripts/network-status)‎"'';
-          color = "rgba(242, 243, 244, 0.75)";
+          #color = "rgba(242, 243, 244, 0.75)";
           font_size = "26";
           #"16"
           font_family = "SF Pro Display Bold";

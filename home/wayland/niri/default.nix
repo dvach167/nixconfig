@@ -44,10 +44,10 @@ in {
         {command = ["wl-paste" "--watch" "cliphist" "store"];}
       ];
 
-      cursor = {
-        theme = "BreezeX-Dark";
-        size = 24;
-      };
+      #cursor = {
+      # theme = "BreezeX-Dark";
+      # size = 24;
+      #};
 
       hotkey-overlay = {
         skip-at-startup = true;
@@ -170,15 +170,15 @@ in {
         focus-ring = {
           enable = false;
           width = 1;
-          active.color = "#BD93F9";
-          inactive.color = "#282A36";
+          #active.color = "#BD93F9";
+          #inactive.color = "#282A36";
         };
 
         border = {
           enable = true;
           width = 1;
-          active.color = "#BD93F9";
-          inactive.color = "#282A36";
+          #active.color = "#BD93F9";
+          #inactive.color = "#282A36";
         };
       };
 

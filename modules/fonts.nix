@@ -7,5 +7,7 @@
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
     texlivePackages.alfaslabone
+    #nerd-fonts._0xproto
+    #nerd-fonts.droid-sans-mono
   ];
 }

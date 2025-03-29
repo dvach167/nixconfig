@@ -1,5 +1,6 @@
 {pkgs, ...}: {
-  services.dunst = {
+  /*
+    services.dunst = {
     enable = true;
     settings.global = {
       monitor = 0;
@@ -32,8 +33,7 @@
       idle_threshold = 120;
 
       # Text
-
-      font = "Work Sans 10";
+      #work sans
       line_height = 0;
       markup = "full";
       format = "<small><b>%a :</b>%s</small>\n%b";
@@ -76,4 +76,5 @@
       timeout = 0;
     };
   };
+  */
 }
