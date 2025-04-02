@@ -38,21 +38,21 @@
     nextcloud-client
     kde-rounded-corners
     ghostty
-    kdePackages.breeze-gtk
     swww
     playerctl
     pamixer
-    cava
-    rofi
     bluez
-    python312Full
-    python3Packages.dbus-python
   ];
+
+  # Pprograms
 
   services.xserver = {
     enable = true;
   };
+
   services.desktopManager.plasma6.enable = true;
+
+  services.tailscale.enable = true;
 
   boot.loader = {
     systemd-boot.enable = false;
@@ -75,6 +75,7 @@
     };
   };
   # All my programs that need configuring
+
   programs.zsh.enable = true;
 
   programs.steam = {

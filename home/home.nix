@@ -49,46 +49,29 @@ in {
 
   stylix = {
     enable = true;
-    cursor.package = pkgs.bibata-cursors;
-    cursor.name = "Bibata-Modern-Ice";
-    cursor.size = 20;
+    cursor.package = pkgs.rose-pine-cursor;
+    cursor.name = "BreezeX-RosePine-Linux";
+    cursor.size = 24;
   };
   stylix.fonts.monospace = {
     package = pkgs.nerd-fonts.jetbrains-mono;
     name = "JetBrainsMono Nerd Font Mono";
   };
-  /*
-    stylix.fonts.monospace.packages = {
-    package = pkgs.nerdfonts.JetBrainsMono;
-    name = "JetBrainsMono Nerd Font Mono";
-  };
-  stylix.fonts.sansSerif.package = {
-    # package = pkgs.dejavu_fonts;
-    # name = "DejaVu Sans";
-    package = pkgs.ubuntu-sans;
-    name = "Ubuntu Sans";
-  };
 
-  stylix.fonts.serif.package = {
-    package = pkgs.dejavu_fonts;
-    name = "DejaVu Serif";
-  };
-  */
-
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine-moon.yaml";
   stylix.autoEnable = true;
   stylix.fonts.sizes = {
-    applications = 12;
+    applications = 9;
     terminal = 10;
-    desktop = 12;
+    desktop = 10;
     popups = 10;
   };
 
   stylix.opacity = {
-    applications = 1.0;
+    applications = 0.6;
     terminal = 0.6;
     desktop = 0.0;
-    popups = 1.0;
+    popups = 0.6;
   };
 
   stylix.polarity = "dark";
