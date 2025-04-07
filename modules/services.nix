@@ -25,7 +25,7 @@
   # OpenVPN for MRU
   services.openvpn.servers = {
     mruDBVPN = {
-      config = ''config /home/dom/.config/openvpn/mruDBVPN'';
+      config = ''config /home/dom/Downloads/macovpn-config.ovpn'';
       autoStart = false;
     };
   };
